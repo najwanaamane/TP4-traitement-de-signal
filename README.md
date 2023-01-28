@@ -1,14 +1,18 @@
 # TP4-traitement-de-signal
 
 **Introduction**
+
 Ce TP vise à appliquer des filtres réels pour éliminer les composantes indésirables d'un signal, en utilisant Matlab pour la simulation. Les objectifs sont de comprendre les différences entre le temps continu et le temps discret, d'améliorer la qualité de filtrage en augmentant l'ordre du filtre, et de tracer les figures appropriées. Le TP se concentrera sur l'application de filtres passe-haut pour supprimer la composante à 50 Hz, et sur la suppression de bruits haute fréquence dans un enregistrement sonore.
 
 **Filtrage et diagramme de Bode**
+
 Nous souhaitons appliquer un filtre passe-haut pour supprimer la composante à 50 Hz. 
 Soit notre signal d'entrée : x(t) = sin(2.pi.f1.t) + sin(2.pi.f2.t) + sin(2.pi.f3.t) Avec f1 = 500 Hz, f2 = 400 Hz et f3 = 50 Hz 
+
 1.	Définir le signal x(t) sur t = [0 5] avec Te = 0,0001 s.
 
 Note : On pose 5-te pour éliminer la fuite spectrale et obtenir des valeurs exactes
+
 <pre>
 clear all
 close all
@@ -35,6 +39,9 @@ fshift =(-N/2:N/2-1)*(fe/N)
 plot(fshift,fftshift(abs(y)))
 title('Transformée de Fourrier de x(t)avec 0.0001')
 </pre>
+![first](https://user-images.githubusercontent.com/86806375/215273979-c13d1d5c-982c-4291-919d-5117c3204c71.JPG)
+
+
 1. Tracer le module de la fonction H(f) avec K=1 et wc = 50 rad/s. 
 2. Tracer 20.log(|H(f)|) pour différentes pulsations de coupure wc, qu'observez-vous ? (Afficher avec semilogx)
 
@@ -58,6 +65,7 @@ end
 
 </pre>
 
+![bode](https://user-images.githubusercontent.com/86806375/215274054-8e9dbd58-a52c-4fa0-a777-b18c752e6a6d.JPG)
 
 3.Choisissez différentes fréquences de coupure et appliquez ce filtrage dans l'espace des fréquences. Qu'observez-vous ?
 <pre>
@@ -119,11 +127,17 @@ title(' le signal filtré avec fc=400')
  plot(fshift,fftshift(abs(fft(inver3))/N)*2);
 title(' le signal filtré avec fc=50')
 </pre>
+![freq](https://user-images.githubusercontent.com/86806375/215274063-47dcf824-421a-47d1-ae2f-45ad060dd990.JPG)
+
 
 4. Choisissez wc qui vous semble optimal. Le filtre est-il bien choisi ? Pourquoi ?
+
 la fréquence fc=50 est la plus optimale ; car elle permet de filtrer le signal sans perte d’information utile
+
 **Dé-bruitage d'un signal sonore**
+
 Dans son petit studio du CROUS, un mauvais futur ingénieur a enregistré une musique en « .wav » avec un très vieux micro. Le résultat est peu concluant, un bruit strident s'est ajouté à sa musique. Heureusement son voisin, expert en traitement du signal est là pour le secourir : « C'est un bruit très haute fréquence, il suffit de le supprimer. » dit-il sûr de lui. 
+
 1.	Proposer une méthode pour supprimer ce bruit sur le signal
 
 Pour supprimer le bruit sur le signal, on peut utiliser un filtre passe-bas. Il permet de supprimer les fréquences hautes, comme le bruit strident, tout en conservant les fréquences basses, comme la musique
@@ -167,6 +181,6 @@ plot(fshift(1:end-1),fftshift(abs(fft(sig_filtred))))
 
 En utilisant un filtre passe-bas, on peut observer une amélioration de la qualité sonore en supprimant le bruit strident. Cependant, il est possible que certaines hautes fréquences importantes pour la musique soient également supprimées, ce qui peut altérer la sonorité du signal final.
 
-** conclusion**
+**conclusion**
 
 En conclusion, ce TP a permis de mettre en pratique les concepts de filtrage et de dé-bruitage de signal en utilisant les diagrammes de Bode ainsi que des filtres passe haut et passe bas se basant sur la transmittance. Il est important de noter que ces concepts peuvent être appliqués à divers types de signaux, y compris les signaux sonores. Ce TP a donc permis de découvrir les outils et méthodes pour améliorer la qualité de signal.
